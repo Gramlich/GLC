@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+
+{% block content %}
+
+    {#    <form method="post" class="form-inline" enctype="multipart/form-data">#}
+    {#        {% csrf_token %}#}
+    {#        {{ form.as_p }}#}
+    {#        <div class="col-lg-12">#}
+    {#            <button id="submit" type="submit" class="btn btn-dark my-2 my-sm-0"><i class="fa fa-bar-chart-o"></i></button>#}
+    {#        </div>#}
+    {##}
+    {#    </form>#}
+
+<br>
+
+
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome!</h1>
+        <p class="lead">A simple analytical tool for the Green Lake Crew</p>
+        <hr class="my-4">
+
+
+        <form method="post" class="form-inline" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input-group col-lg-12">
+                    <label class="input-group-btn mr-0">
+                            <span class="btn btn-dark">
+                        Browse&hellip; <input type="file" style="display: none;" class="custom-file-input" id="{{ field.id_for_label }}" name="{{ field.html_name }}" multiple>
+                    </span>
+                    </label>
+                    <label class="col-lg-6 pl-0">
+                        <input type="text" class="form-control col-lg-12" readonly>
+                    </label>
+                <button id="submit" type="submit" class="btn btn-success"><i class="fa fa-bar-chart-o"></i>  Upload </button>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="{% static "js/form.js" %}">
+    </script>
+
+
+
+{% endblock %}

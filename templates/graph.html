@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <span class="navbar-text h3 mb-0 active"> {{ piece.boat }}
+        <small class="text-muted">
+            {{ piece.date }}
+        </small>
+    </span>
+
+{% endblock title %}
+
+
+
+{% block summary %}
+    <div class="container-fluid" id="piece_summary">
+
+        <div class="card-group collapsed with-shadow center-summary" id="summary_stats"
+             aria-labelledby="heading-collapse">
+            <div class="card">
+
+
+                <div class="card-body">
+                    <h5 class="card-title mb-0">Input Source</h5>
+                    <p class="card-text">{{ piece.speed_input }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Piece Type</h5>
+                    <p class="card-text">{{ piece.session_type }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Piece Duration</h5>
+                    <p class="card-text">{{ piece.total_time }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Distance</h5>
+                    <p class="card-text">{{ piece.total_distance }} Meters</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Average Speed</h5>
+                    <p class="card-text">{{ piece.avg_speed }} Meters / Second</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Average Stroke Rate</h5>
+                    <p class="card-text">{{ piece.avg_stroke_rate }} Strokes per Minute</p>
+                    {#<p class="card-text"><small class="text-muted">Strokes per Minute</small></p>#}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Average Split</h5>
+                    <p class="card-text">{{ piece.avg_split }} /500m</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container col-lg-12 graph-container">
+
+        <div class="center-graph with-shadow">
+            <div class="row">
+                <div class="container col-lg-12">
+                    {#            <h6>{% url 'json_data_split_elp' piece.slug %}</h6>#}
+                    <div id="split_elp" data-url="{% url 'json_data_split_elp' piece.slug %}"></div>
+                    <script>
+                        $.ajax({
+                            url: $("#split_elp").attr("data-url"),
+                            dataType: 'json',
+                            success: function (data) {
+                                Highcharts.stockChart("split_elp", data);
+                                console.log('SPLIT_ELP!!!', data);
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="center-graph with-shadow">
+            <div class="row">
+                <div class="container col-lg-12">
+                    {#            <h6>{% url 'json_data_dps_elp' piece.slug %}</h6>#}
+                    <div id="dps_elp" data-url="{% url 'json_data_dps_elp' piece.slug %}"></div>
+                    <script>
+                        $.ajax({
+                            url: $("#dps_elp").attr("data-url"),
+                            dataType: 'json',
+                            success: function (data) {
+                                Highcharts.stockChart("dps_elp", data);
+                                console.log('dps_elp!!!', data);
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="center-graph with-shadow">
+
+            <div class="row">
+
+                <div class="container col-lg-12">
+                    {#            <h6>{% url 'json_data_SR_DfS' piece.slug %}</h6>#}
+                    <div id="SR_DfS" data-url="{% url 'json_data_SR_DfS' piece.slug %}"></div>
+                    <script>
+                        $.ajax({
+                            url: $("#SR_DfS").attr("data-url"),
+                            dataType: 'json',
+                            success: function (data) {
+                                Highcharts.chart("SR_DfS", data);
+                                console.log('SR_DfS!!!', data);
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="center-graph with-shadow">
+
+            <div class="row">
+                <div class="container col-lg-12">
+                    {#            <h6>{% url 'json_data_dps_dfs' piece.slug %}</h6>#}
+                    <div id="dps_dfs" data-url="{% url 'json_data_dps_dfs' piece.slug %}"></div>
+                    <script>
+                        $.ajax({
+                            url: $("#dps_dfs").attr("data-url"),
+                            dataType: 'json',
+                            success: function (data) {
+                                Highcharts.chart("dps_dfs", data);
+                                console.log('dps_dfs!!!', data);
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <!-- bottom table -->
+
+
+
+        <div class="center-table with-shadow">
+            <div class="row">
+                <div class="container-fluid">
+                    <table class="table table-striped table-condensed" id="single-piece-table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Elapsed Time</th>
+                            <th>Stroke Rate</th>
+                            <th>Split</th>
+                            <th>Speed (m/s)</th>
+                            <th>Distance Per Stroke</th>
+                            <th>Distance from Start</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for stroke in per_stroke_data %}
+                            <tr>
+                                <td>
+                                    <a href="#"></a>
+                                    <small class="text">{{ stroke.0 }}</small>
+                                </td>
+                                <td>
+                                    <a href="#"></a>
+                                    <small class="text">{{ stroke.1 }}</small>
+                                </td>
+                                <td>
+                                    <a href="#"></a>
+                                    <small class="text">{{ stroke.2 }}</small>
+                                </td>
+                                <td>
+                                    <a href="#"></a>
+                                    <small class="text">{{ stroke.3 }}</small>
+                                </td>
+                                <td>
+                                    <a href="#"></a>
+                                    <small class="text">{{ stroke.4 }}</small>
+                                </td>
+                                <td>
+                                    <a href="#"></a>
+                                    <small class="text">{{ stroke.5 }}</small>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static "js/tables.js" %}"></script>
+    <script src="{% static "js/theme.js" %}"></script>
+
+
+
+
+
+{% endblock content %}

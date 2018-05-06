@@ -1,0 +1,87 @@
+body {
+    /*background-image: url(../img/light_grey.jpg);*/
+    background: #e7ffeb;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #c9f5cc;
+}
+
+.table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+    padding: 2px;
+}
+
+.navbar-text {
+    width: 80%;
+    display: inline-block;
+    text-align: center;
+}
+
+.navbar-dark > .navbar-text {
+    color: whitesmoke;
+}
+
+.card-body {
+    padding-bottom: 5px;
+    padding-top: 5px;
+
+}
+
+.card-title {
+    padding-bottom: 5px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+}
+
+.highcharts-title {
+    fill: #434348;
+    font-weight: bold !important;
+    letter-spacing: 0.3em;
+    font-size: 2em !important;
+    padding-top: 15px;
+}
+
+.center-graph {
+    margin: auto;
+    padding-right: 50px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    background: #fff;
+}
+
+.with-shadow {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05)
+}
+
+.center-table {
+    margin: auto;
+    padding: 20px;
+    width: 100%;
+    background: #fff;
+}
+
+.center-summary {
+    margin: auto;
+    width: 85%
+}
+
+#piece_summary {
+    margin-top: 131px;
+    position: fixed;
+}
+
+.graph-container {
+    margin-top: 160px
+}
+
+.centered {
+    margin: auto;
+    margin-top: 66px;
+
+}
+
+.dropdown{
+    display: inline;
+}

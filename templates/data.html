@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <table class="table table-striped table-condensed" id="all-workouts-table">
+        <thead class="thead-dark">
+        <tr>
+            <th> Name</th>
+            <th> Boat</th>
+            <th> Date</th>
+            <th> Session Type</th>
+            <th> Speed Input</th>
+            <th> Total Distance</th>
+            <th> Total Time</th>
+            <th> Average Split</th>
+            <th> Average Speed</th>
+            <th> Average Stroke Rate</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for wo in all_workouts %}
+            <tr>
+                <td>
+                    <a href="{{ wo.get_absolute_url }}">
+                        <small class="text"> {{ wo }} </small>
+                    </a>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.boat }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.date }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.session_type }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.speed_input }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.total_distance }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.total_time }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.avg_split }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.avg_speed }} </small>
+                </td>
+                <td>
+                    <a href="#"></a>
+                    <small class="text"> {{ wo.avg_stroke_rate }} </small>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <script src="{% static "js/tables.js" %}"></script>
+
+
+
+
+{% endblock content %}

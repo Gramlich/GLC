@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta name="description" content="Home">
+    <meta name="author" content="Gnome">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all">
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Oxygen:400,300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//s3.amazonaws.com/graphtv/style.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    {#    <script src="https://code.highcharts.com/highcharts.js"></script>#}
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    {#    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>#}
+    {#    <script src="https://code.highcharts.com/highcharts-more.js"></script>#}
+
+    {#    <script src="https://code.highcharts.com/modules/exporting.js"></script>#}
+
+    <script src="//s3.amazonaws.com/graphtv/spin.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.16/cr-1.4.1/r-2.2.1/rg-1.0.2/sc-1.4.4/datatables.min.css"/>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs4/dt-1.10.16/cr-1.4.1/r-2.2.1/rg-1.0.2/sc-1.4.4/datatables.min.js"></script>
+
+    {% load static %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock %}
+
+
+</head>
+<body>
+
+<!-- Top Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    {% block summary %}
+    {% endblock %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav col-lg-12">
+
+            <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{% url 'data' %}">DataSets </a>
+
+            {% block title %}
+            {% endblock %}
+
+
+
+            {% if user.is_authenticated %}
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                            <a class="dropdown-item" href="#">My account</a>
+                            <a class="dropdown-item" href="#">Change password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                        </div>
+                    </li>
+                </ul>
+
+            {% else %}
+                <form class="form-inline ml-auto">
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign up</a>
+                </form>
+            {% endif %}
+
+
+        </div>
+    </div>
+
+
+</nav>
+
+<div class="col-lg-8 centered">
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block upload %}
+    {% endblock upload %}
+
+</div>
+
+
+</body>
+</html>
+
