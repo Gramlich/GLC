@@ -28,9 +28,14 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )}
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'GLC',
+        'USER': 'u_GLC',
+        'PASSWORD': 'rowyourboatx7',
+        'HOST': 'localhost',
+        'PORT': '',
+    }}
 
 # Application definition
 
